@@ -1,24 +1,16 @@
 package com.rangetuur.emagnet.blocks.tileentities;
 
-import com.google.common.base.Predicates;
 import com.rangetuur.emagnet.items.MagnetItem;
 import com.rangetuur.emagnet.registry.ModBlockEntityTypes;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -27,19 +19,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.IItemHandler;
-import org.antlr.v4.runtime.atn.SemanticContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.sql.rowset.Predicate;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

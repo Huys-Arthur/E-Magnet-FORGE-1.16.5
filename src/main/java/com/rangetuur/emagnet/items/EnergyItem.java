@@ -1,10 +1,14 @@
 package com.rangetuur.emagnet.items;
 
 import com.rangetuur.emagnet.CustomEnergyStorage;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -13,6 +17,8 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.text.NumberFormat;
+import java.util.List;
 
 public class EnergyItem extends Item{
     private final int maxPower;
@@ -24,16 +30,18 @@ public class EnergyItem extends Item{
         this.transfer = maxPower;
     }
 
-    /*
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public ITextComponent getDescription() {
+        return super.getDescription();
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(cap -> {
             NumberFormat format = NumberFormat.getInstance();
-            // todo: migrate to i18n
-            tooltip.add(new StringTextComponent(String.format("%s/%s Crystal Flux", format.format(cap.getEnergyStored()), format.format(cap.getMaxEnergyStored()))));
+            tooltip.add(new StringTextComponent(String.format("%s/%s FE", format.format(cap.getEnergyStored()), format.format(cap.getMaxEnergyStored()))));
         });
     }
-     */
 
     @Override
     public boolean showDurabilityBar(ItemStack itemStack) {

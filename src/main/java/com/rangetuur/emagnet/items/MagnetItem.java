@@ -57,7 +57,7 @@ public class MagnetItem extends EnergyItem{
         double y = entity.getY();
         double z = entity.getZ();
 
-        List<ItemEntity> items = world.getEntities(EntityType.ITEM, AxisAlignedBB.of(new MutableBoundingBox((int) x-range,(int) y-range,(int) z-range,(int) x+range,(int) y+range,(int) z+range)), Objects::nonNull);
+        List<ItemEntity> items = world.getEntities(EntityType.ITEM, AxisAlignedBB.of(new MutableBoundingBox((int) x-1-range,(int) y+1-range,(int) z-range,(int) x-1+range,(int) y+1+range,(int) z+range)), Objects::nonNull);
 
         for (ItemEntity item : items) {
             int energyForItem = item.getItem().getCount();

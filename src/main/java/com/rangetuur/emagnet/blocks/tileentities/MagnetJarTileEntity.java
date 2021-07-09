@@ -1,5 +1,6 @@
 package com.rangetuur.emagnet.blocks.tileentities;
 
+import com.rangetuur.emagnet.EMagnetConfig.ServerConfig;
 import com.rangetuur.emagnet.items.MagnetItem;
 import com.rangetuur.emagnet.registry.ModBlockEntityTypes;
 import net.minecraft.block.BlockState;
@@ -42,13 +43,20 @@ public class MagnetJarTileEntity extends TileEntity implements ITickableTileEnti
             IEnergyStorage energyStorage = content.getCapability(CapabilityEnergy.ENERGY).orElse(null);
             if(energyStorage!=null) {
                 if(energyStorage.getEnergyStored()!=energyStorage.getMaxEnergyStored()) {
-                    if (!level.getEntities(EntityType.LIGHTNING_BOLT, new AxisAlignedBB(worldPosition.getX(), worldPosition.getY() + 1, worldPosition.getZ(), worldPosition.getX() + 1, worldPosition.getY() + 3, worldPosition.getZ() + 1), Objects::nonNull).isEmpty()) {
+                    if (!level.getEntities(EntityType.LIGHTNING_BOLT, new AxisAlignedBB(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), worldPosition.getX() + 1, worldPosition.getY() + 3, worldPosition.getZ() + 1), Objects::nonNull).isEmpty()) {
                         energyStorage.receiveEnergy(energyStorage.getMaxEnergyStored(), false);
                         setChanged();
                     }
                 }
                 if (content.getItem() instanceof MagnetItem){
-                    attractItemsAroundBlock();
+                    if (ServerConfig.disable_magnet_jar_with_redstone.get()) {
+                        if(!getLevel().hasNeighborSignal(getBlockPos())){
+                            attractItemsAroundBlock();
+                        }
+                    }
+                    else {
+                        attractItemsAroundBlock();
+                    }
                 }
             }
         }
@@ -63,8 +71,8 @@ public class MagnetJarTileEntity extends TileEntity implements ITickableTileEnti
         double z = pos.getZ();
 
         if(getLevel()!=null){
-            List<ItemEntity> items = getLevel().getEntities(EntityType.ITEM, AxisAlignedBB.of(new MutableBoundingBox((int) x-range,(int) y-range,(int) z-range,(int) x+1+range,(int) y+1+range,(int) z+1+range)), Objects::nonNull);
-            List<ItemEntity> itemsInBlock = getLevel().getEntities(EntityType.ITEM, AxisAlignedBB.of(new MutableBoundingBox(pos.getX(),pos.getY(),pos.getZ(),pos.getX()+1,pos.getY()+1,pos.getZ()+1)), Objects::nonNull);
+            List<ItemEntity> items = getLevel().getEntities(EntityType.ITEM, AxisAlignedBB.of(new MutableBoundingBox(((int) x)-range,((int) y)-range,((int) z)-range,((int) x)+range,((int) y)+range,((int) z)+range)), Objects::nonNull);
+            List<ItemEntity> itemsInBlock = getLevel().getEntities(EntityType.ITEM, AxisAlignedBB.of(new MutableBoundingBox(pos.getX(),pos.getY(),pos.getZ(),pos.getX(),pos.getY(),pos.getZ())), Objects::nonNull);
 
             for (ItemEntity item : items) {
                 if (!itemsInBlock.contains(item)){

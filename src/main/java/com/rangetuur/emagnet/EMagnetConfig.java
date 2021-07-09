@@ -51,11 +51,9 @@ public class EMagnetConfig {
             disable_magnet_jar = BUILDER
                     .comment("If false the magnet jar is not disabled else if true the magnet jar is disabled")
                     .define("disable_magnet_jar", false);
-            /*
             disable_magnet_jar_with_redstone = BUILDER
                     .comment("If false the magnet jar can not be disabled with redstone else if true the magnet jar can be disabled with redstone (when the magnet jar is disabled it can't attract items anymore but it can still charge)")
                     .define("disable_magnet_jar_with_redstone", true);
-             */
 
             BUILDER.pop();
 

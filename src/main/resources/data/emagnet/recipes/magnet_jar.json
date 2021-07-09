@@ -1,7 +1,7 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "#C#",
+        "###",
         "# #",
         "OOO"
     ],
@@ -11,9 +11,6 @@
         },
         "O": {
             "item": "minecraft:crying_obsidian"
-        },
-        "C": {
-            "item": "minecraft:copper_ingot"
         }
 
     },

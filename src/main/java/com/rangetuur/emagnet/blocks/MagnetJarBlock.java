@@ -95,8 +95,10 @@ public class MagnetJarBlock extends Block{
             IEnergyStorage energyStorage = handStack.getCapability(CapabilityEnergy.ENERGY).orElse(null);
             if(energyStorage!=null){
                 if (tileEntity.isItemValid(1, handStack)) {
-                    tileEntity.insertItem(1, handStack, false);
-                    player.setItemInHand(hand, ItemStack.EMPTY);
+                    ItemStack result = tileEntity.insertItem(1, handStack, false);
+                    if (result!=null){
+                        player.setItemInHand(hand, ItemStack.EMPTY);
+                    }
                     tileEntity.setChanged();
                 }
             }
